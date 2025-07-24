@@ -1,0 +1,30 @@
+<div class="app-container">
+  <mat-toolbar color="primary" class="app-toolbar">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>{{ title }}</span>
+    <span class="toolbar-spacer"></span>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="app-sidenav-container">
+    <mat-sidenav #sidenav mode="over" class="app-sidenav">
+      <mat-nav-list>
+        <a mat-list-item routerLink="/clientes" (click)="sidenav.close()">
+          <mat-icon>people</mat-icon>
+          <span class="nav-caption">Clientes</span>
+        </a>
+        <a mat-list-item routerLink="/clientes/nuevo" (click)="sidenav.close()">
+          <mat-icon>person_add</mat-icon>
+          <span class="nav-caption">Nuevo Cliente</span>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div class="content-container">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

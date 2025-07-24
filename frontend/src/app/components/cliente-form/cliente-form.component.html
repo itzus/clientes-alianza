@@ -1,0 +1,78 @@
+<div class="cliente-form-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Nuevo Cliente</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()" class="cliente-form">
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Shared Key</mat-label>
+            <input matInput formControlName="sharedKey" placeholder="Ingrese el shared key">
+            <mat-error *ngIf="clienteForm.get('sharedKey')?.invalid">{{ getErrorMessage('sharedKey') }}</mat-error>
+          </mat-form-field>
+        </div>
+        
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombre" placeholder="Ingrese el nombre completo">
+            <mat-error *ngIf="clienteForm.get('nombre')?.invalid">{{ getErrorMessage('nombre') }}</mat-error>
+          </mat-form-field>
+        </div>
+        
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" placeholder="Ingrese el email" type="email">
+            <mat-error *ngIf="clienteForm.get('email')?.invalid">{{ getErrorMessage('email') }}</mat-error>
+          </mat-form-field>
+        </div>
+        
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Teléfono</mat-label>
+            <input matInput formControlName="telefono" placeholder="Ingrese el teléfono">
+            <mat-error *ngIf="clienteForm.get('telefono')?.invalid">{{ getErrorMessage('telefono') }}</mat-error>
+          </mat-form-field>
+        </div>
+        
+        <div class="form-row date-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha Inicio</mat-label>
+            <input matInput [matDatepicker]="pickerInicio" formControlName="fechaInicio">
+            <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+            <mat-datepicker #pickerInicio></mat-datepicker>
+            <mat-error *ngIf="clienteForm.get('fechaInicio')?.invalid">{{ getErrorMessage('fechaInicio') }}</mat-error>
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha Fin</mat-label>
+            <input matInput [matDatepicker]="pickerFin" formControlName="fechaFin">
+            <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFin></mat-datepicker>
+            <mat-error *ngIf="clienteForm.get('fechaFin')?.invalid">{{ getErrorMessage('fechaFin') }}</mat-error>
+          </mat-form-field>
+        </div>
+        
+        <div *ngIf="clienteForm.hasError('fechasInvalidas')" class="date-error">
+          {{ getFechasError() }}
+        </div>
+        
+        <div class="form-actions">
+          <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">
+            <mat-icon>save</mat-icon> Guardar
+          </button>
+          <button mat-raised-button color="warn" type="button" routerLink="/clientes" [disabled]="isLoading">
+            <mat-icon>cancel</mat-icon> Cancelar
+          </button>
+        </div>
+      </form>
+      
+      <div *ngIf="isLoading" class="loading-overlay">
+        <mat-spinner></mat-spinner>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
