@@ -48,4 +48,35 @@ public class PageResponse<T> {
      * Indica si es la última página
      */
     private boolean last;
+    
+    /**
+     * Indica si es la primera página
+     */
+    private boolean first;
+    
+    /**
+     * Indica si la página está vacía
+     */
+    private boolean empty;
+    
+    /**
+     * Método de conveniencia para verificar si es la primera página
+     */
+    public boolean isFirst() {
+        return pageNumber == 0;
+    }
+    
+    /**
+     * Método de conveniencia para verificar si es la última página
+     */
+    public boolean isLast() {
+        return last;
+    }
+    
+    /**
+     * Método de conveniencia para verificar si la página está vacía
+     */
+    public boolean isEmpty() {
+        return content == null || content.isEmpty();
+    }
 }

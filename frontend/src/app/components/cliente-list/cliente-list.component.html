@@ -17,10 +17,13 @@
         <button mat-raised-button color="primary" (click)="buscarPorSharedKey()">
           <mat-icon>search</mat-icon> Buscar
         </button>
+        <button mat-raised-button color="primary" (click)="busquedaAvanzada()">
+          <mat-icon>filter_list</mat-icon> Filtros Avanzados
+        </button>
       </div>
       
       <!-- Filtros avanzados -->
-      <div class="filters-container">
+      <div class="filters-container" *ngIf="isSearchAdvance">
         <h3>Filtros avanzados</h3>
         <div class="filters-form">
           <mat-form-field appearance="outline">
@@ -130,7 +133,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
         
-        <div *ngIf="clientes.length === 0 && !isLoading" class="no-data">
+        <div *ngIf="totalElements === 0 && !isLoading" class="no-data">
           No se encontraron clientes con los criterios especificados.
         </div>
         

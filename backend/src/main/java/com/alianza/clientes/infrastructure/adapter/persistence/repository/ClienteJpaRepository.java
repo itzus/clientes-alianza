@@ -9,12 +9,14 @@ import java.util.Optional;
 
 /**
  * Repositorio JPA para la entidad ClienteEntity.
- * Extiende JpaRepository para operaciones CRUD básicas y JpaSpecificationExecutor
+ * Extiende JpaRepository para operaciones CRUD básicas y
+ * JpaSpecificationExecutor
  * para consultas dinámicas con especificaciones.
  */
 @Repository
-public interface ClienteJpaRepository extends JpaRepository<ClienteEntity, Long>, JpaSpecificationExecutor<ClienteEntity> {
-    
+public interface ClienteJpaRepository
+        extends JpaRepository<ClienteEntity, Long>, JpaSpecificationExecutor<ClienteEntity> {
+
     /**
      * Busca un cliente por su sharedKey
      * 
@@ -22,7 +24,7 @@ public interface ClienteJpaRepository extends JpaRepository<ClienteEntity, Long>
      * @return Optional con el cliente si existe, vacío si no
      */
     Optional<ClienteEntity> findBySharedKey(String sharedKey);
-    
+
     /**
      * Verifica si existe un cliente con el sharedKey proporcionado
      * 
@@ -30,4 +32,12 @@ public interface ClienteJpaRepository extends JpaRepository<ClienteEntity, Long>
      * @return true si existe, false si no
      */
     boolean existsBySharedKey(String sharedKey);
+
+    /**
+     * Busca el último cliente registrado por ID
+     * 
+     * @return Optional con el cliente si existe, vacío si no
+     */
+    Optional<ClienteEntity> findTopByOrderByIdDesc();
+
 }

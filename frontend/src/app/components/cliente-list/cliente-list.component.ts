@@ -23,6 +23,7 @@ export class ClienteListComponent implements OnInit {
   // Filtros
   filtro: ClienteFilter = {};
   sharedKeySearch: string = '';
+  isSearchAdvance: boolean= false;
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -38,10 +39,12 @@ export class ClienteListComponent implements OnInit {
   }
   
   loadClientes(): void {
+    console.info('Inicio Carga Clientes');
     this.isLoading = true;
     this.clienteService.getClientes(this.pageIndex, this.pageSize)
       .subscribe({
         next: (response: PageResponse<Cliente>) => {
+          console.log(response);
           this.clientes = response.content;
           this.totalElements = response.totalElements;
           this.isLoading = false;
@@ -87,12 +90,18 @@ export class ClienteListComponent implements OnInit {
         }
       });
   }
+
+  busquedaAvanzada():void{
+    this.isSearchAdvance = !this.isSearchAdvance;
+  }
   
   aplicarFiltros(): void {
+    console.info('Aplicar filtros');
     this.isLoading = true;
     this.clienteService.searchClientes(this.filtro, this.pageIndex, this.pageSize)
       .subscribe({
         next: (response: PageResponse<Cliente>) => {
+          console.log(response);
           this.clientes = response.content;
           this.totalElements = response.totalElements;
           this.isLoading = false;
@@ -103,6 +112,7 @@ export class ClienteListComponent implements OnInit {
           this.isLoading = false;
         }
       });
+
   }
   
   limpiarFiltros(): void {

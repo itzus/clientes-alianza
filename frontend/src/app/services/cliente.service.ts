@@ -45,7 +45,7 @@ export class ClienteService {
    * @returns Observable con el cliente encontrado
    */
   getClienteBySharedKey(sharedKey: string): Observable<Cliente> {
-    return this.http.get<Cliente>(`${this.apiUrl}/search/shared-key/${sharedKey}`);
+    return this.http.get<Cliente>(`${this.apiUrl}/${sharedKey}`);
   }
 
   /**
@@ -64,7 +64,7 @@ export class ClienteService {
       .set('sortBy', sortBy)
       .set('sortDir', sortDir);
 
-    return this.http.post<PageResponse<Cliente>>(`${this.apiUrl}/search`, filter, { params });
+    return this.http.post<PageResponse<Cliente>>(`${this.apiUrl}/filter`, filter, { params });
   }
 
   /**

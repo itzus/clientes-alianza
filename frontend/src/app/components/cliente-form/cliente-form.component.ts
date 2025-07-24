@@ -28,7 +28,6 @@ export class ClienteFormComponent implements OnInit {
   
   initForm(): void {
     this.clienteForm = this.fb.group({
-      sharedKey: ['', [Validators.required, Validators.maxLength(50)]],
       nombre: ['', [Validators.required, Validators.maxLength(100)]],
       email: ['', [Validators.required, Validators.email, Validators.maxLength(100)]],
       telefono: ['', [Validators.required, Validators.maxLength(20)]],
@@ -40,11 +39,9 @@ export class ClienteFormComponent implements OnInit {
   fechasValidator(group: FormGroup): {[key: string]: boolean} | null {
     const fechaInicio = group.get('fechaInicio')?.value;
     const fechaFin = group.get('fechaFin')?.value;
-    
     if (fechaInicio && fechaFin && new Date(fechaInicio) > new Date(fechaFin)) {
       return { 'fechasInvalidas': true };
     }
-    
     return null;
   }
   

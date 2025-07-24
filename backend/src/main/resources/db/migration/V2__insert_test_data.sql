@@ -1,0 +1,22 @@
+-- Insertar 20 registros de prueba en la tabla clientes
+INSERT INTO clientes (shared_key, nombre, telefono, email, fecha_inicio, fecha_fin, fecha_creacion) VALUES
+('CLI001', 'Juan Pérez García', '+57 300 123 4567', 'juan.perez@email.com', '2024-01-15', '2024-12-31', '2024-01-15'),
+('CLI002', 'María González López', '+57 301 234 5678', 'maria.gonzalez@email.com', '2024-02-01', '2024-12-31', '2024-02-01'),
+('CLI003', 'Carlos Rodríguez Martín', '+57 302 345 6789', 'carlos.rodriguez@email.com', '2024-01-20', '2024-11-30', '2024-01-20'),
+('CLI004', 'Ana Sofía Hernández', '+57 303 456 7890', 'ana.hernandez@email.com', '2024-03-10', '2024-12-31', '2024-03-10'),
+('CLI005', 'Luis Fernando Castro', '+57 304 567 8901', 'luis.castro@email.com', '2024-01-05', '2024-10-31', '2024-01-05'),
+('CLI006', 'Carmen Elena Vargas', '+57 305 678 9012', 'carmen.vargas@email.com', '2024-02-15', '2024-12-31', '2024-02-15'),
+('CLI007', 'Roberto Andrés Silva', '+57 306 789 0123', 'roberto.silva@email.com', '2024-01-30', '2024-09-30', '2024-01-30'),
+('CLI008', 'Patricia Morales Ruiz', '+57 307 890 1234', 'patricia.morales@email.com', '2024-03-01', '2024-12-31', '2024-03-01'),
+('CLI009', 'Diego Alejandro Torres', '+57 308 901 2345', 'diego.torres@email.com', '2024-02-20', '2024-11-15', '2024-02-20'),
+('CLI010', 'Lucía Fernanda Jiménez', '+57 309 012 3456', 'lucia.jimenez@email.com', '2024-01-10', '2024-12-31', '2024-01-10'),
+('CLI011', 'Andrés Felipe Ramírez', '+57 310 123 4567', 'andres.ramirez@email.com', '2024-03-05', '2024-08-31', '2024-03-05'),
+('CLI012', 'Valentina Ospina Cruz', '+57 311 234 5678', 'valentina.ospina@email.com', '2024-02-10', '2024-12-31', '2024-02-10'),
+('CLI013', 'Santiago Mejía Soto', '+57 312 345 6789', 'santiago.mejia@email.com', '2024-01-25', '2024-07-31', '2024-01-25'),
+('CLI014', 'Isabella Restrepo Gómez', '+57 313 456 7890', 'isabella.restrepo@email.com', '2024-03-15', '2024-12-31', '2024-03-15'),
+('CLI015', 'Sebastián Aguilar Peña', '+57 314 567 8901', 'sebastian.aguilar@email.com', '2024-02-05', '2024-06-30', '2024-02-05'),
+('CLI016', 'Camila Andrea Vega', '+57 315 678 9012', 'camila.vega@email.com', '2024-01-12', '2024-12-31', '2024-01-12'),
+('CLI017', 'Mateo Alejandro Díaz', '+57 316 789 0123', 'mateo.diaz@email.com', '2024-03-20', '2024-05-31', '2024-03-20'),
+('CLI018', 'Sofía Catalina Mendoza', '+57 317 890 1234', 'sofia.mendoza@email.com', '2024-02-25', '2024-12-31', '2024-02-25'),
+('CLI019', 'Nicolás David Herrera', '+57 318 901 2345', 'nicolas.herrera@email.com', '2024-01-08', '2024-04-30', '2024-01-08'),
+('CLI020', 'Mariana Alejandra Rojas', '+57 319 012 3456', 'mariana.rojas@email.com', '2024-03-12', '2024-12-31', '2024-03-12');
