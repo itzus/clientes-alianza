@@ -6,7 +6,7 @@
 
     <!-- Acciones principales -->
     <div class="main-actions">
-      <button mat-raised-button color="primary" routerLink="/clientes/nuevo">
+      <button mat-raised-button color="primary" (click)="nuevoCliente()">
         <mat-icon>add</mat-icon> New
       </button>
       <button mat-raised-button color="accent" (click)="exportarCSV()">
@@ -177,7 +177,7 @@
               <button
                 mat-icon-button
                 color="primary"
-                [routerLink]="['/clientes', cliente.id]"
+                (click)="editarCliente(cliente)"
               >
                 <mat-icon>edit</mat-icon>
               </button>

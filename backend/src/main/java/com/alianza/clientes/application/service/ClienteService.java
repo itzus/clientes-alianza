@@ -5,6 +5,8 @@ import com.alianza.clientes.domain.model.ClienteFilter;
 import com.alianza.clientes.domain.model.PageResponse;
 import com.alianza.clientes.domain.port.api.ClienteServicePort;
 import com.alianza.clientes.domain.port.spi.ClientePersistencePort;
+
+import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,9 +45,10 @@ public class ClienteService implements ClienteServicePort {
      */
     @Override
     public Cliente saveCliente(Cliente cliente) {
-        cliente.setSharedKey(generateSharedKey());
+        if (StringUtils.isBlank(cliente.getSharedKey()))
+            cliente.setSharedKey(generateSharedKey());
         log.info("Guardando cliente con sharedKey: {}", cliente.getSharedKey());
-        if (clientePersistencePort.existsBySharedKey(cliente.getSharedKey())) {
+        if (cliente.getId() == null && clientePersistencePort.existsBySharedKey(cliente.getSharedKey())) {
             log.error("Error al guardar cliente: sharedKey {} ya existe", cliente.getSharedKey());
             throw new IllegalArgumentException("Ya existe un cliente con el sharedKey: " + cliente.getSharedKey());
         }

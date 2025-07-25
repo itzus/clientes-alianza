@@ -24,6 +24,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
 
 // Components
 import { ClienteListComponent } from './components/cliente-list/cliente-list.component';
@@ -41,6 +42,7 @@ import { ClienteFormComponent } from './components/cliente-form/cliente-form.com
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDialogModule,
     RouterModule.forRoot(routes),
     
     // Material Modules
