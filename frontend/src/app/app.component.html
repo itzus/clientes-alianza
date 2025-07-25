@@ -3,6 +3,13 @@
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
+    <img
+      src="https://cdn.modyo.cloud/uploads/9e0fec6a-61c6-4e89-8486-0e95cbc46c43/original/alianza-logo.webp"
+      alt="Logo personas"
+      height="30"
+      width="85"
+    />
+    <span>&nbsp;&nbsp;</span>
     <span>{{ title }}</span>
     <span class="toolbar-spacer"></span>
   </mat-toolbar>
@@ -12,11 +19,21 @@
       <mat-nav-list>
         <a mat-list-item routerLink="/clientes" (click)="sidenav.close()">
           <mat-icon>people</mat-icon>
-          <span class="nav-caption">Clientes</span>
+          <span class="nav-caption">Clients</span>
         </a>
-        <a mat-list-item routerLink="/clientes/nuevo" (click)="sidenav.close()">
+        <a mat-list-item (click)="sidenav.close()">
+          <mat-icon>history</mat-icon>
           <mat-icon>person_add</mat-icon>
-          <span class="nav-caption">Nuevo Cliente</span>
+          <span class="nav-caption">Client Look History </span>
+        </a>
+        <a mat-list-item (click)="sidenav.close()">
+          <mat-icon>fiber_pin</mat-icon>
+          <span class="nav-caption">Emergency PIN Configuration </span>
+        </a>
+        <a mat-list-item (click)="sidenav.close()">
+          <mat-icon>history</mat-icon>
+          <mat-icon>fiber_pin</mat-icon>
+          <span class="nav-caption">Emergency PIN History </span>
         </a>
       </mat-nav-list>
     </mat-sidenav>

@@ -1,147 +1,203 @@
 <div class="cliente-list-container">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Gestión de Clientes</mat-card-title>
+      <mat-card-title>Management Clients</mat-card-title>
     </mat-card-header>
-    
+
+    <!-- Acciones principales -->
+    <div class="main-actions">
+      <button mat-raised-button color="primary" routerLink="/clientes/nuevo">
+        <mat-icon>add</mat-icon> New
+      </button>
+      <button mat-raised-button color="accent" (click)="exportarCSV()">
+        <mat-icon>download</mat-icon> Export
+      </button>
+    </div>
+
     <mat-card-content>
       <!-- Búsqueda por Shared Key -->
       <div class="search-container">
         <mat-form-field appearance="outline" class="search-field">
-          <mat-label>Buscar por Shared Key</mat-label>
-          <input matInput [(ngModel)]="sharedKeySearch" placeholder="Ingrese Shared Key">
-          <button *ngIf="sharedKeySearch" matSuffix mat-icon-button aria-label="Clear" (click)="sharedKeySearch=''">
+          <mat-label>Enter Shared Key</mat-label>
+          <input
+            matInput
+            [(ngModel)]="sharedKeySearch"
+            placeholder="Enter Shared Key"
+          />
+          <button
+            *ngIf="sharedKeySearch"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="sharedKeySearch = ''"
+          >
             <mat-icon>close</mat-icon>
           </button>
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="buscarPorSharedKey()">
-          <mat-icon>search</mat-icon> Buscar
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="buscarPorSharedKey()"
+        >
+          <mat-icon>search</mat-icon> search
         </button>
         <button mat-raised-button color="primary" (click)="busquedaAvanzada()">
-          <mat-icon>filter_list</mat-icon> Filtros Avanzados
+          <mat-icon>filter_list</mat-icon> Advanced Search
         </button>
       </div>
-      
+
       <!-- Filtros avanzados -->
       <div class="filters-container" *ngIf="isSearchAdvance">
-        <h3>Filtros avanzados</h3>
+        <h3>Advanced Search</h3>
         <div class="filters-form">
           <mat-form-field appearance="outline">
-            <mat-label>Nombre</mat-label>
-            <input matInput [(ngModel)]="filtro.nombre" placeholder="Nombre del cliente">
+            <mat-label>Name</mat-label>
+            <input
+              matInput
+              [(ngModel)]="filtro.nombre"
+              placeholder="Nombre del cliente"
+            />
           </mat-form-field>
-          
+
           <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
-            <input matInput [(ngModel)]="filtro.email" placeholder="Email del cliente">
+            <mat-label>Phone</mat-label>
+            <input
+              matInput
+              [(ngModel)]="filtro.telefono"
+              placeholder="Teléfono del cliente"
+            />
           </mat-form-field>
-          
+
           <mat-form-field appearance="outline">
-            <mat-label>Teléfono</mat-label>
-            <input matInput [(ngModel)]="filtro.telefono" placeholder="Teléfono del cliente">
+            <mat-label>E-mail</mat-label>
+            <input
+              matInput
+              [(ngModel)]="filtro.email"
+              placeholder="Email del cliente"
+            />
           </mat-form-field>
-          
+
           <mat-form-field appearance="outline">
-            <mat-label>Fecha Inicio</mat-label>
-            <input matInput [matDatepicker]="pickerInicio" [(ngModel)]="filtro.fechaInicio">
-            <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+            <mat-label>Start Date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="pickerInicio"
+              [(ngModel)]="filtro.fechaInicio"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="pickerInicio"
+            ></mat-datepicker-toggle>
             <mat-datepicker #pickerInicio></mat-datepicker>
           </mat-form-field>
-          
+
           <mat-form-field appearance="outline">
-            <mat-label>Fecha Fin</mat-label>
-            <input matInput [matDatepicker]="pickerFin" [(ngModel)]="filtro.fechaFin">
-            <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+            <mat-label>End Date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="pickerFin"
+              [(ngModel)]="filtro.fechaFin"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="pickerFin"
+            ></mat-datepicker-toggle>
             <mat-datepicker #pickerFin></mat-datepicker>
           </mat-form-field>
         </div>
-        
+
         <div class="filters-actions">
           <button mat-raised-button color="primary" (click)="aplicarFiltros()">
-            <mat-icon>filter_list</mat-icon> Aplicar Filtros
+            <mat-icon>filter_list</mat-icon> Ok
           </button>
           <button mat-raised-button color="warn" (click)="limpiarFiltros()">
-            <mat-icon>clear</mat-icon> Limpiar Filtros
+            <mat-icon>clear</mat-icon> Close
           </button>
         </div>
       </div>
-      
-      <!-- Acciones principales -->
-      <div class="main-actions">
-        <button mat-raised-button color="primary" routerLink="/clientes/nuevo">
-          <mat-icon>add</mat-icon> Nuevo Cliente
-        </button>
-        <button mat-raised-button color="accent" (click)="exportarCSV()">
-          <mat-icon>download</mat-icon> Exportar CSV
-        </button>
-      </div>
-      
+
+      <mat-card-title>Clients</mat-card-title>
+
       <!-- Tabla de clientes -->
       <div class="table-container mat-elevation-z8">
         <div *ngIf="isLoading" class="loading-shade">
           <mat-spinner></mat-spinner>
         </div>
-        
-        <table mat-table [dataSource]="clientes" matSort class="full-width-table">
+
+        <table
+          mat-table
+          [dataSource]="clientes"
+          matSort
+          class="full-width-table"
+        >
           <!-- Shared Key Column -->
           <ng-container matColumnDef="sharedKey">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Shared Key</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Shared Key
+            </th>
             <td mat-cell *matCellDef="let cliente">{{ cliente.sharedKey }}</td>
           </ng-container>
-          
+
           <!-- Nombre Column -->
           <ng-container matColumnDef="nombre">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Businnes ID
+            </th>
             <td mat-cell *matCellDef="let cliente">{{ cliente.nombre }}</td>
           </ng-container>
-          
+
           <!-- Email Column -->
           <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>E-mail</th>
             <td mat-cell *matCellDef="let cliente">{{ cliente.email }}</td>
           </ng-container>
-          
+
           <!-- Teléfono Column -->
           <ng-container matColumnDef="telefono">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
             <td mat-cell *matCellDef="let cliente">{{ cliente.telefono }}</td>
           </ng-container>
-          
-          <!-- Fecha Inicio Column -->
-          <ng-container matColumnDef="fechaInicio">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Inicio</th>
-            <td mat-cell *matCellDef="let cliente">{{ cliente.fechaInicio | date:'dd/MM/yyyy' }}</td>
+
+          <!-- Fecha Creacion Column -->
+          <ng-container matColumnDef="fechaCreacion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Data Added
+            </th>
+            <td mat-cell *matCellDef="let cliente">
+              {{ cliente.fechaCreacion | date : "dd/MM/yyyy" }}
+            </td>
           </ng-container>
-          
-          <!-- Fecha Fin Column -->
-          <ng-container matColumnDef="fechaFin">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Fin</th>
-            <td mat-cell *matCellDef="let cliente">{{ cliente.fechaFin | date:'dd/MM/yyyy' }}</td>
-          </ng-container>
-          
+
           <!-- Acciones Column -->
           <ng-container matColumnDef="acciones">
-            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-icon>edit</mat-icon>
+            </th>
             <td mat-cell *matCellDef="let cliente">
-              <button mat-icon-button color="primary" [routerLink]="['/clientes', cliente.id]">
-                <mat-icon>visibility</mat-icon>
+              <button
+                mat-icon-button
+                color="primary"
+                [routerLink]="['/clientes', cliente.id]"
+              >
+                <mat-icon>edit</mat-icon>
               </button>
             </td>
           </ng-container>
-          
+
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
-        
+
         <div *ngIf="totalElements === 0 && !isLoading" class="no-data">
-          No se encontraron clientes con los criterios especificados.
+          No found clients
         </div>
-        
-        <mat-paginator 
+
+        <mat-paginator
           [length]="totalElements"
           [pageSize]="pageSize"
           [pageSizeOptions]="[5, 10, 25, 50]"
-          (page)="onPageChange($event)">
+          (page)="onPageChange($event)"
+        >
         </mat-paginator>
       </div>
     </mat-card-content>

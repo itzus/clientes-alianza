@@ -45,7 +45,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @RestController
 @RequestMapping("/clientes")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @Slf4j
 @Tag(name = "Gestión de Clientes", description = "API para la gestión completa de clientes")

@@ -14,7 +14,7 @@ import { ClienteService } from '../../services/cliente.service';
 })
 export class ClienteListComponent implements OnInit {
   clientes: Cliente[] = [];
-  displayedColumns: string[] = ['sharedKey', 'nombre', 'email', 'telefono', 'fechaInicio', 'fechaFin', 'acciones'];
+  displayedColumns: string[] = ['sharedKey', 'nombre', 'email', 'telefono', 'fechaCreacion',  'acciones'];
   totalElements: number = 0;
   pageSize: number = 10;
   pageIndex: number = 0;
@@ -119,6 +119,7 @@ export class ClienteListComponent implements OnInit {
     this.filtro = {};
     this.sharedKeySearch = '';
     this.pageIndex = 0;
+    this.isSearchAdvance = false;
     this.loadClientes();
   }
   
